@@ -3,7 +3,7 @@ import {
   REQUESTED_DATA,
   REQUESTED_DATA_SUCCEEDED,
   REQUESTED_DATA_FAILED,
-  SET_BITCOIN_PRICE, SET_ETHEREUM_PRICE
+  SET_CRYPTO_PRICE
 } from '../actions/types'
 
 export default function reducers(state = initialState, action) {
@@ -24,19 +24,21 @@ export default function reducers(state = initialState, action) {
         loading: false,
         error: true,
       };
-    case SET_BITCOIN_PRICE:
+    case SET_CRYPTO_PRICE:
+      const { crypto } = action;
+      let { cryptos } = state;
+      updateCrypto(crypto, cryptos)
       return {
         ...state,
-        BTC: action.price,
-        loading: false,
-      };
-    case SET_ETHEREUM_PRICE:
-      return {
-        ...state,
-        ETH: action.price,
         loading: false,
       };
     default:
       return state;
   }
 }
+
+const updateCrypto = (crypto, list) => {
+  let item = list.find(x => x.name === crypto.name);
+  item.growth = item.price < crypto.value;
+  item.price = crypto.value;
+};

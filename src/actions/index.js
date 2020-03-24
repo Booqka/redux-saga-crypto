@@ -2,20 +2,15 @@ import {
   GET_CRYPTO,
   REQUESTED_DATA,
   REQUESTED_DATA_FAILED,
-  SET_BITCOIN_PRICE,
-  SET_ETHEREUM_PRICE
-} from './types'
+  SET_CRYPTO_PRICE,
+} from './types';
 
 export const requestData = () => {
   return { type: REQUESTED_DATA }
 };
 
-export const setBitcoinPrice = (price) => {
-  return { type: SET_BITCOIN_PRICE, price }
-};
-
-export const setEthereumPrice = (price) => {
-  return { type: SET_ETHEREUM_PRICE, price }
+export const setCryptoPrice = (crypto) => {
+  return { type: SET_CRYPTO_PRICE, crypto }
 };
 
 export const requestDataError = () => {
@@ -25,5 +20,3 @@ export const requestDataError = () => {
 export const fetchCrypto = () => {
   return { type: GET_CRYPTO }
 };
-
-
